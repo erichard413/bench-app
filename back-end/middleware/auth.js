@@ -100,5 +100,4 @@ module.exports = {
   ensureAdmin,
   ensureReqBodyCorrectUserOrAdmin,
   ensureCorrectUserOrAdmin,
-  ensureSuperAdmin,
 };

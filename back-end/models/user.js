@@ -22,11 +22,11 @@ class User {
       `SELECT username,
         id,
         password,
-        first_name AS firstName,
-        last_name AS lastName,
+        first_name AS "firstName",
+        last_name AS "lastName",
         email,
         created_at,
-        is_admin
+        is_admin AS "isAdmin"
         FROM users
         WHERE username=$1
         `,
@@ -67,7 +67,6 @@ class User {
     if (username.toLowerCase() === "anonymous")
       throw new BadRequestError(`Invalid username, please choose another.`);
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
-    console.log(hashedPassword);
     const result = await db.query(
       `INSERT INTO users (username, password, first_name, last_name, email, created_at, is_admin) VALUES ($1, $2, $3, $4, $5, NOW(), FALSE) RETURNING username, first_name AS "firstName", last_name AS "lastName", email, created_at AS "createdAt", is_admin AS "isAdmin"`,
       [
@@ -80,6 +79,34 @@ class User {
     );
     const user = result.rows[0];
     return user;
+  }
+  static async getCount({ username, uexact }) {
+    let sql = `SELECT COUNT(*) FROM users`;
+    let params = [];
+    if (username && !uexact) {
+      sql += ` WHERE username ILIKE $1`;
+      params.push(`%${username}%`);
+    }
+    if (username && uexact) {
+      sql += ` WHERE username=$1`;
+    }
+    const result = await db.query(sql, params);
+    return parseInt(result.rows[0].count);
+  }
+  static async getPage({ username, limit, offset }) {
+    let sql = `SELECT username, first_name AS "firstName", last_name AS "lastName", email, created_at AS "createdAt" FROM users`;
+    let params = [];
+    if (username) {
+      params.push(`%${username}%`);
+      sql += ` WHERE username ILIKE $${params.length}`;
+    }
+    if (limit) {
+      params.push(limit);
+      sql += ` LIMIT $${params.length}`;
+    }
+
+    const result = await db.query(sql, params);
+    return result.rows;
   }
 }
 
