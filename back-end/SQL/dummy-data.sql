@@ -1,13 +1,13 @@
 -- =========================
 -- INSERT USERS
 -- =========================
-INSERT INTO users (first_name, last_name, email, username, password)
+INSERT INTO users (first_name, last_name, email, username, password, display_name)
 VALUES
-('John', 'Doe', 'john@example.com', 'johndoe', 'password123'),
-('Jane', 'Smith', 'jane@example.com', 'janesmith', 'password123'),
-('Mike', 'Johnson', 'mike@example.com', 'mikej', 'password123'),
-('Emily', 'Davis', 'emily@example.com', 'emilyd', 'password123'),
-('Chris', 'Brown', 'chris@example.com', 'chrisb', 'password123');
+('John', 'Doe', 'john@example.com', 'johndoe', 'password123', 'johndoe'),
+('Jane', 'Smith', 'jane@example.com', 'janesmith', 'password123', 'Janesmith'),
+('Mike', 'Johnson', 'mike@example.com', 'mikej', 'password123', 'MikeJ'),
+('Emily', 'Davis', 'emily@example.com', 'emilyd', 'password123', 'emilyD'),
+('Chris', 'Brown', 'chris@example.com', 'chrisb', 'password123', 'ChrisB');
 
 -- =========================
 -- INSERT TEAMS

@@ -4,7 +4,8 @@ const morgan = require("morgan");
 const { NotFoundError } = require("./expressError");
 const { authenticateJWT } = require("./middleware/auth");
 const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/users");
+const usersRoutes = require("./routes/users");
+const userRoutes = require("./routes/user");
 
 const app = express();
 
@@ -15,7 +16,8 @@ app.use(authenticateJWT);
 
 // routes go here
 app.use("/auth", authRoutes);
-app.use("/users", userRoutes);
+app.use("/users", usersRoutes);
+app.use("/user", userRoutes);
 
 // handle 404 errors
 app.use(function (req, res, next) {

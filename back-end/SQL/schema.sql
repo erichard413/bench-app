@@ -5,6 +5,7 @@ CREATE TABLE users (
     email VARCHAR(50) UNIQUE NOT NULL,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     username VARCHAR(20) NOT NULL,
+    display_name VARCHAR(20) NOT NULL,
     password VARCHAR(20) NOT NULL,
     is_admin BOOLEAN DEFAULT FALSE
 );
