@@ -6,6 +6,7 @@ const { authenticateJWT } = require("./middleware/auth");
 const authRoutes = require("./routes/auth");
 const usersRoutes = require("./routes/users");
 const userRoutes = require("./routes/user");
+const teamRoutes = require("./routes/teams");
 
 const app = express();
 
@@ -15,9 +16,10 @@ app.use(morgan("tiny"));
 app.use(authenticateJWT);
 
 // routes go here
-app.use("/auth", authRoutes);
-app.use("/users", usersRoutes);
-app.use("/user", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/teams", teamRoutes);
 
 // handle 404 errors
 app.use(function (req, res, next) {

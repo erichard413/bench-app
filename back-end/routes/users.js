@@ -11,7 +11,7 @@ const { createToken } = require("../helpers/tokens");
 const router = new express.Router();
 
 const defaultPage = 1;
-const defaultLimit = 1;
+const defaultLimit = 15;
 
 // GET /
 // Gets list of all users. Admin required.
