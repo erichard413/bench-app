@@ -1,0 +1,2 @@
+rosters table should have unique identifier
+roster_positions table should have a foreign key that links to rosters table

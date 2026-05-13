@@ -46,11 +46,11 @@ VALUES
 -- =========================
 INSERT INTO rosters (user_id, team_id, season_id, jersey_number, role)
 VALUES
-(1,1,1,9,'Captain'),
-(2,1,1,12,'Player'),
-(3,2,1,30,'Goalie'),
-(4,3,1,7,'Player'),
-(5,2,2,18,'Captain');
+(1,1,1,9,'captain'),
+(2,1,1,12,'player'),
+(3,2,1,30,'goalie'),
+(4,3,1,7,'player'),
+(5,2,2,18,'captain');
 
 -- =========================
 -- ROSTER POSITIONS

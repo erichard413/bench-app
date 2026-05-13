@@ -23,7 +23,7 @@ router.get("/:username", async function (req, res, next) {
     } else {
       foundUser = await User.getUser(username);
     }
-    console.log(foundUser);
+
     if (foundUser.length == 0) throw new BadRequestError("No user found!");
     return res.json(foundUser[0]);
   } catch (err) {

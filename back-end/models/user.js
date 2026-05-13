@@ -104,6 +104,12 @@ class User {
     const result = await db.query(sql, [username]);
     return result.rows;
   }
+  static async getUserById(id) {
+    let sql = `SELECT username, first_name AS "firstName", last_name AS "lastName", display_name AS "displayName" FROM users WHERE id=$1`;
+    const result = await db.query(sql, [id]);
+    return result;
+  }
+
   static async adminGetUser(username) {
     let sql = `SELECT username, first_name AS "firstName", last_name AS "lastName", email, created_at AS "createdAt", is_admin AS "isAdmin" FROM users WHERE username=$1`;
     const result = await db.query(sql, [username]);

@@ -29,7 +29,7 @@ class Teams {
       params.push(limit);
       sql += ` LIMIT $${params.length}`;
     }
-    console.log(sql);
+
     const result = await db.query(sql, params);
     return result.rows;
   }
@@ -46,10 +46,14 @@ class Teams {
       `INSERT INTO teams (team_name) VALUES ($1) RETURNING id`,
       [teamName],
     );
-    console.log(result);
+
     if (!result.rows[0])
       throw new BadRquestError("Could not create team! Please try again.");
     return result.rows[0];
+  }
+  static async doesTeamExist(id) {
+    const res = await db.query("SELECT * FROM teams WHERE id=$1", [id]);
+    return res.rows.length == 0 ? false : true;
   }
 }
 

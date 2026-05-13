@@ -7,6 +7,7 @@ const authRoutes = require("./routes/auth");
 const usersRoutes = require("./routes/users");
 const userRoutes = require("./routes/user");
 const teamRoutes = require("./routes/teams");
+const rosterRoutes = require("./routes/roster");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/teams", teamRoutes);
+app.use("/api/roster", rosterRoutes);
 
 // handle 404 errors
 app.use(function (req, res, next) {
