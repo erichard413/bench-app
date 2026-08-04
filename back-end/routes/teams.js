@@ -2,6 +2,7 @@
 
 const jsonschema = require("jsonschema");
 const teamNew = require("../schema/teamNew.json");
+const teamUpdate = require("../schema/teamUpdate.json");
 const express = require("express");
 const { ensureCorrectUserOrAdmin, ensureAdmin } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
@@ -57,6 +58,27 @@ router.post("/", async function (req, res, next) {
   try {
     const newTeam = await Teams.createTeam(data);
     return res.json(newTeam);
+  } catch (err) {
+    return next(err);
+  }
+});
+
+// PATCH /teams/:id
+// updates team information for team ID
+router.patch("/:id", async function (req, res, next) {
+  const data = req.body;
+  const id = req.params.id;
+  const validator = jsonschema.validate(req.body, teamUpdate);
+  if (!validator.valid) {
+    const errs = validator.errors.map(e => e.stack);
+    throw new BadRequestError(errs);
+  }
+  // check if team exists
+  const doesExist = await Teams.doesTeamExist(id);
+  if (!doesExist) throw new BadRequestError(`Team not found!`);
+  try {
+    const updatedTeam = await Teams.updateTeam(id, data);
+    return res.json(updatedTeam);
   } catch (err) {
     return next(err);
   }

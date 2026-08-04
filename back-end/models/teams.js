@@ -55,6 +55,18 @@ class Teams {
     const res = await db.query("SELECT * FROM teams WHERE id=$1", [id]);
     return res.rows.length == 0 ? false : true;
   }
+  static async updateTeam(id, data) {
+    const { logoUrl, owner, teamName } = data;
+    const { setCols, values } = sqlForPartialUpdate(data, {
+      logoUrl: "logo_url",
+      owner: "owner",
+      teamName: "team_name",
+    });
+    const teamIdx = "$" + (values.length + 1);
+    const querySQL = `UPDATE teams SET ${setCols} WHERE id=${teamIdx} RETURNING id, team_name AS "teamName", team_owner AS "teamOwner", logo_url AS "logoUrl", created_at AS "createdAt"`;
+    const result = await db.query(querySQL, [...values, id]);
+    return result.rows[0];
+  }
 }
 
 module.exports = Teams;
