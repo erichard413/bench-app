@@ -25,6 +25,8 @@ router.get("/:id", async function (req, res, next) {
   }
 });
 
+// POST /add/:teamId
+// Adds player to roster
 router.post("/add/:teamId", async function (req, res, next) {
   try {
     const teamId = req.params.teamId;
@@ -53,7 +55,7 @@ router.post("/add/:teamId", async function (req, res, next) {
       teamId,
       seasonId,
     );
-    console.log(isValidNumber);
+
     if (!isValidNumber)
       throw new BadRequestError(
         "Jersey number is taken. Please choose another!",

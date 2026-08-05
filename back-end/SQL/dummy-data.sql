@@ -3,11 +3,18 @@
 -- =========================
 INSERT INTO users (first_name, last_name, email, username, password, display_name)
 VALUES
-('John', 'Doe', 'john@example.com', 'johndoe', 'password123', 'johndoe'),
-('Jane', 'Smith', 'jane@example.com', 'janesmith', 'password123', 'Janesmith'),
-('Mike', 'Johnson', 'mike@example.com', 'mikej', 'password123', 'MikeJ'),
-('Emily', 'Davis', 'emily@example.com', 'emilyd', 'password123', 'emilyD'),
-('Chris', 'Brown', 'chris@example.com', 'chrisb', 'password123', 'ChrisB');
+('John', 'Doe', 'john@example.com', 'johndoe', '$2b$12$1NB.CwAL6v1/Tpx.hpdKVOUeQburecgSA1rEOz4otzQe/8Ju/RB8e', 'johndoe'),
+('Jane', 'Smith', 'jane@example.com', 'janesmith', '$2b$12$1NB.CwAL6v1/Tpx.hpdKVOUeQburecgSA1rEOz4otzQe/8Ju/RB8e', 'Janesmith'),
+('Mike', 'Johnson', 'mike@example.com', 'mikej', '$2b$12$1NB.CwAL6v1/Tpx.hpdKVOUeQburecgSA1rEOz4otzQe/8Ju/RB8e', 'MikeJ'),
+('Emily', 'Davis', 'emily@example.com', 'emilyd', '$2b$12$1NB.CwAL6v1/Tpx.hpdKVOUeQburecgSA1rEOz4otzQe/8Ju/RB8e', 'emilyD'),
+('Chris', 'Brown', 'chris@example.com', 'chrisb', '$2b$12$1NB.CwAL6v1/Tpx.hpdKVOUeQburecgSA1rEOz4otzQe/8Ju/RB8e', 'ChrisB');
+
+-- =========================
+-- INSERT ADMIN USER
+-- =========================
+INSERT INTO users (first_name, last_name, email, username, password, display_name, is_admin)
+VALUES
+('Admin', 'User', 'admin@admin.com', 'benchappadmin', '$2b$12$1NB.CwAL6v1/Tpx.hpdKVOUeQburecgSA1rEOz4otzQe/8Ju/RB8e', 'admin', TRUE);
 
 -- =========================
 -- INSERT TEAMS

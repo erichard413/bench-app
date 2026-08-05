@@ -46,7 +46,14 @@ class User {
     // if not valid, return error for invalid password/username
     throw new UnauthorizedError("Invalid username/password");
   }
-  static async register({ username, password, firstName, lastName, email }) {
+  static async register({
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    displayName,
+  }) {
     // check for duplicate username
 
     if (await Checks.usernameCheck(username))
@@ -61,6 +68,9 @@ class User {
     if (username.toLowerCase() === "anonymous")
       throw new BadRequestError(`Invalid username, please choose another.`);
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+    if (!displayName) {
+      displayName = username;
+    }
     const result = await db.query(
       `INSERT INTO users (username, password, first_name, last_name, email, created_at, is_admin, display_name) VALUES ($1, $2, $3, $4, $5, NOW(), FALSE, $6) RETURNING username, first_name AS "firstName", last_name AS "lastName", email, created_at AS "createdAt", is_admin AS "isAdmin", display_name AS "displayName"`,
       [
@@ -69,7 +79,7 @@ class User {
         firstName,
         lastName,
         email.toLowerCase(),
-        username,
+        displayName,
       ],
     );
     const user = result.rows[0];

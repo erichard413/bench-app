@@ -28,8 +28,13 @@
       "minLength": 6,
       "maxLength": 50,
       "format": "email"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": ["username", "firstName", "lastName", "password", "email"]
 }

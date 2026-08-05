@@ -67,6 +67,11 @@ class Teams {
     const result = await db.query(querySQL, [...values, id]);
     return result.rows[0];
   }
+  static async getTeam(id) {
+    const res = await db.query(`SELECT * FROM teams`);
+    if (!res.rows[0]) throw new BadRequestError("Team not found!");
+    return res.rows[0];
+  }
 }
 
 module.exports = Teams;

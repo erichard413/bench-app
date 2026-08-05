@@ -63,6 +63,18 @@ router.post("/", async function (req, res, next) {
   }
 });
 
+// GET /teams/:id
+// retrieves team information for team ID
+router.get("/:id", async function (req, res, next) {
+  const id = req.params.id;
+  try {
+    const team = await Teams.getTeam(id);
+    return res.json(team);
+  } catch (err) {
+    return next(err);
+  }
+});
+
 // PATCH /teams/:id
 // updates team information for team ID
 router.patch("/:id", async function (req, res, next) {
