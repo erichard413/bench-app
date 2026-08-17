@@ -118,6 +118,15 @@ class Teams {
     );
     return res.rows.length === 0 ? true : false;
   }
+  // remove player from roster -> takes player id, season, team id
+  static async removePlayer(player, team, season) {
+    const res = await db.query(
+      "DELETE FROM rosters WHERE user_id=$1 AND team_id=$2 AND season_id=$3 RETURNING *",
+      [player, team, season],
+    );
+    console.log(res.rows);
+    return res.rows;
+  }
 }
 
 module.exports = Teams;
