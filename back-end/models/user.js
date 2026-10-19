@@ -110,7 +110,7 @@ class User {
     return result.rows;
   }
   static async getUser(username) {
-    let sql = `SELECT username, first_name AS "firstName", last_name AS "lastName", display_name AS "displayName" FROM users WHERE username=$1`;
+    let sql = `SELECT username, first_name AS "firstName", last_name AS "lastName", display_name AS "displayName", id FROM users WHERE username=$1`;
     const result = await db.query(sql, [username]);
     return result.rows;
   }
@@ -121,7 +121,7 @@ class User {
   }
 
   static async adminGetUser(username) {
-    let sql = `SELECT username, first_name AS "firstName", last_name AS "lastName", email, created_at AS "createdAt", is_admin AS "isAdmin" FROM users WHERE username=$1`;
+    let sql = `SELECT username, first_name AS "firstName", last_name AS "lastName", email, created_at AS "createdAt", is_admin AS "isAdmin", id FROM users WHERE username=$1`;
     const result = await db.query(sql, [username]);
     return result.rows;
   }

@@ -20,6 +20,7 @@ CREATE TABLE teams (
 
 CREATE TABLE seasons (
     id SERIAL PRIMARY KEY,
+    team_id INTEGER REFERENCES teams ON DELETE SET NULL,
     name VARCHAR(30) NOT NULL,
     start_date TIMESTAMP,
     end_date TIMESTAMP

@@ -6,6 +6,7 @@ const { ensureCorrectUserOrAdmin, ensureAdmin } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
 const { createToken } = require("../helpers/tokens");
+const Teams = require("../models/teams");
 const router = new express.Router();
 
 // GET /:username
@@ -56,6 +57,18 @@ router.delete("/:username", ensureAdmin, async function (req, res, next) {
     return res
       .status(200)
       .json({ message: `User of username ${req.params.username} deleted!` });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+// GET /:id/teams
+// Gets team information for user
+router.get("/:id/teams", async function (req, res, next) {
+  const userId = req.params.id;
+  try {
+    const result = await Teams.getUserTeams(userId);
+    return res.json(result);
   } catch (err) {
     return next(err);
   }

@@ -68,9 +68,17 @@ class Teams {
     return result.rows[0];
   }
   static async getTeam(id) {
-    const res = await db.query(`SELECT * FROM teams`);
+    const res = await db.query(`SELECT * FROM teams WHERE id=$1`, [id]);
     if (!res.rows[0]) throw new BadRequestError("Team not found!");
     return res.rows[0];
+  }
+  static async getUserTeams(userId) {
+    const res = await db.query(
+      `SELECT DISTINCT t.id AS "teamId", team_name AS "teamName", team_owner AS "teamOwner", logo_url AS "logoUrl", created_at AS "createdAt" FROM teams AS "t" LEFT JOIN rosters AS "r" ON t.id = r.team_id WHERE r.user_id = $1`,
+      [userId],
+    );
+    if (!res.rows[0]) throw new BadRequestError("No teams found!");
+    return res.rows;
   }
 }
 
